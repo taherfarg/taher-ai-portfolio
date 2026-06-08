@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowDownRight, ArrowRight, ArrowUpRight, Check, X } from "lucide-react";
+import { ArrowDownRight, ArrowRight, ArrowUpRight, Check, Menu, X } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Hls from "hls.js";
@@ -103,13 +103,14 @@ function LoadingScreen({ onComplete }: { onComplete: () => void }) {
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("home");
+  const [menuOpen, setMenuOpen] = useState(false);
   const links = [
-    { label: "Home", id: "home", className: "hidden sm:inline-flex" },
-    { label: "About", id: "about", className: "inline-flex" },
-    { label: "Skills", id: "skills", className: "inline-flex" },
-    { label: "Work", id: "work", className: "inline-flex" },
-    { label: "Experience", id: "experience", className: "hidden lg:inline-flex" },
-    { label: "Contact", id: "contact", className: "hidden md:inline-flex" },
+    { label: "Home", id: "home" },
+    { label: "About", id: "about" },
+    { label: "Skills", id: "skills" },
+    { label: "Work", id: "work" },
+    { label: "Experience", id: "experience" },
+    { label: "Contact", id: "contact" },
   ];
   useEffect(() => {
     const update = () => {
@@ -124,18 +125,43 @@ function Navbar() {
     window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);
   }, []);
-  const go = (id: string) => document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
+  const go = (id: string) => {
+    setMenuOpen(false);
+    document.querySelector(id)?.scrollIntoView({ behavior: "smooth" });
+  };
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-4 md:pt-6">
-      <div className={`inline-flex items-center gap-1 rounded-full border border-white/10 bg-surface/80 p-2 backdrop-blur-xl transition-shadow ${scrolled ? "shadow-xl shadow-black/40" : ""}`}>
+    <nav className="fixed inset-x-0 top-0 z-50 px-3 pt-3 md:pt-6">
+      <div className={`mx-auto hidden w-fit items-center gap-1 rounded-full border border-white/10 bg-surface/80 p-2 backdrop-blur-xl transition-shadow md:flex ${scrolled ? "shadow-xl shadow-black/40" : ""}`}>
         <button onClick={() => go("#home")} aria-label="Home" className="group grid h-9 w-9 place-items-center rounded-full accent-gradient">
           <span className="grid h-[34px] w-[34px] place-items-center rounded-full bg-bg font-display text-sm italic transition-transform group-hover:scale-90">TF</span>
         </button>
-        <span className="mx-1 hidden h-5 w-px bg-stroke sm:block" />
-        {links.map((link) => <button key={link.id} onClick={() => go(`#${link.id}`)} className={`${link.className} rounded-full px-3 py-2 text-xs transition sm:px-4 ${active === link.id ? "bg-stroke/70 text-text-primary" : "text-muted hover:bg-stroke/60 hover:text-text-primary"}`}>{link.label}</button>)}
+        <span className="mx-1 h-5 w-px bg-stroke" />
+        {links.map((link) => <button key={link.id} onClick={() => go(`#${link.id}`)} className={`rounded-full px-3 py-2 text-xs transition lg:px-4 ${active === link.id ? "bg-stroke/70 text-text-primary" : "text-muted hover:bg-stroke/60 hover:text-text-primary"}`}>{link.label}</button>)}
         <span className="mx-1 h-5 w-px bg-stroke" />
         <a href="https://wa.me/971547224740" target="_blank" rel="noreferrer" className="gradient-border rounded-full bg-surface px-3 py-2 text-xs sm:px-4">WhatsApp <ArrowUpRight className="ml-1 inline h-3 w-3" /></a>
       </div>
+      <div className={`relative mx-auto flex max-w-md items-center justify-between rounded-full border border-white/10 bg-surface/85 p-2 pl-2.5 backdrop-blur-xl transition-shadow md:hidden ${scrolled ? "shadow-xl shadow-black/40" : ""}`}>
+        <button onClick={() => go("#home")} aria-label="Home" className="group grid h-10 w-10 place-items-center rounded-full accent-gradient">
+          <span className="grid h-[38px] w-[38px] place-items-center rounded-full bg-bg font-display text-sm italic transition-transform group-active:scale-90">TF</span>
+        </button>
+        <button onClick={() => go(`#${active}`)} className="rounded-full px-3 py-2 text-[10px] uppercase tracking-[.2em] text-muted">{links.find((link) => link.id === active)?.label}</button>
+        <div className="flex items-center gap-1.5">
+          <a aria-label="Chat on WhatsApp" href="https://wa.me/971547224740" target="_blank" rel="noreferrer" className="grid h-10 w-10 place-items-center rounded-full border border-stroke bg-bg text-text-primary"><ArrowUpRight className="h-4 w-4" /></a>
+          <button onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} className="grid h-10 w-10 place-items-center rounded-full border border-stroke bg-bg text-text-primary">
+            <AnimatePresence mode="wait" initial={false}>{menuOpen ? <motion.span key="close" initial={{ opacity: 0, rotate: -90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: 90 }}><X className="h-4 w-4" /></motion.span> : <motion.span key="menu" initial={{ opacity: 0, rotate: 90 }} animate={{ opacity: 1, rotate: 0 }} exit={{ opacity: 0, rotate: -90 }}><Menu className="h-4 w-4" /></motion.span>}</AnimatePresence>
+          </button>
+        </div>
+      </div>
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div initial={{ opacity: 0, y: -15, scale: .96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -12, scale: .97 }} transition={{ duration: .25 }} className="mx-auto mt-2 max-w-md overflow-hidden rounded-[28px] border border-white/10 bg-surface/95 p-3 shadow-2xl shadow-black/60 backdrop-blur-2xl md:hidden">
+            <div className="grid grid-cols-2 gap-2">
+              {links.map((link, i) => <motion.button initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * .035 }} key={link.id} onClick={() => go(`#${link.id}`)} className={`flex items-center justify-between rounded-2xl border px-4 py-4 text-left text-sm transition ${active === link.id ? "border-[#89aacc]/40 bg-[#102136] text-text-primary" : "border-stroke bg-bg/60 text-muted"}`}><span>{link.label}</span><span className="font-display text-lg italic">{String(i + 1).padStart(2, "0")}</span></motion.button>)}
+            </div>
+            <a href="https://wa.me/971547224740" target="_blank" rel="noreferrer" className="accent-gradient mt-2 flex items-center justify-between rounded-2xl px-5 py-4 text-sm text-bg"><span>Start a WhatsApp conversation</span><ArrowUpRight className="h-4 w-4" /></a>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
@@ -168,7 +194,7 @@ function Hero({ ready }: { ready: boolean }) {
         <h1 className="name-reveal mb-6 font-display text-6xl italic leading-[.84] tracking-[-.04em] md:text-8xl lg:text-[8rem]">Taher Farg</h1>
         <p className="blur-in mb-5 text-sm text-white/70 md:text-base">An <span key={role} className="animate-role-fade-in inline-block font-display text-xl italic text-white md:text-2xl">{roles[role]}</span> based in Dubai.</p>
         <p className="blur-in mb-10 max-w-xl text-sm leading-7 text-white/55 md:text-base">I turn business problems into deployable AI products across LLM applications, computer vision, OCR, and intelligent automation.</p>
-        <div className="blur-in flex gap-3">
+        <div className="blur-in flex w-full max-w-sm flex-col gap-3 sm:w-auto sm:max-w-none sm:flex-row">
           <a href="#work" className="gradient-border rounded-full bg-text-primary px-7 py-3.5 text-sm text-bg transition duration-300 hover:scale-105 hover:bg-bg hover:text-text-primary">See works <ArrowDownRight className="ml-2 inline h-4 w-4" /></a>
           <a href="https://wa.me/971547224740" target="_blank" rel="noreferrer" className="gradient-border rounded-full bg-bg/80 px-7 py-3.5 text-sm ring-1 ring-stroke transition duration-300 hover:scale-105">WhatsApp me</a>
         </div>
@@ -445,7 +471,7 @@ function Footer() {
             <a href="mailto:taherfarg50@gmail.com" className="gradient-border inline-flex rounded-full bg-bg/70 px-8 py-4 text-sm ring-1 ring-white/15 transition hover:scale-105">Send an email <ArrowUpRight className="ml-3 h-4 w-4" /></a>
           </div>
           <div className="mt-24 flex flex-col items-center justify-between gap-5 border-t border-white/10 py-8 text-[10px] uppercase tracking-[.2em] text-white/50 sm:flex-row">
-            <div className="flex gap-5"><a href="https://taherfarg.com" className="transition hover:text-white">Portfolio</a><a href="https://wa.me/971547224740" target="_blank" rel="noreferrer" className="transition hover:text-white">WhatsApp</a><a href="mailto:taherfarg50@gmail.com" className="transition hover:text-white">Email</a><a href="tel:+971547224740" className="transition hover:text-white">Phone</a></div>
+            <div className="flex flex-wrap justify-center gap-5"><a href="https://taherfarg.com" className="transition hover:text-white">Portfolio</a><a href="https://wa.me/971547224740" target="_blank" rel="noreferrer" className="transition hover:text-white">WhatsApp</a><a href="mailto:taherfarg50@gmail.com" className="transition hover:text-white">Email</a><a href="tel:+971547224740" className="transition hover:text-white">Phone</a></div>
             <div className="flex items-center gap-3"><span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" /><span className="relative h-2 w-2 rounded-full bg-emerald-500" /></span>Dubai · Open to AI opportunities</div>
           </div>
         </div>
