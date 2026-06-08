@@ -83,6 +83,22 @@ button {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
 }
 
+.card-shine {
+  background: radial-gradient(500px circle at 15% 0%, rgba(137, 170, 204, .13), transparent 42%);
+}
+
+.scan-line {
+  background: linear-gradient(90deg, transparent, rgba(160, 207, 255, .9), transparent);
+  box-shadow: 0 0 16px rgba(137, 170, 204, .8);
+  animation: project-scan 2.8s ease-in-out infinite;
+}
+
+.skill-card,
+.project-card {
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
 .animate-role-fade-in {
   animation: role-fade-in .4s ease-out;
 }
@@ -104,6 +120,13 @@ button {
 @keyframes gradient-shift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
+}
+
+@keyframes project-scan {
+  0% { transform: translateY(-10px); opacity: 0; }
+  15% { opacity: .8; }
+  75% { opacity: .55; }
+  100% { transform: translateY(420px); opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

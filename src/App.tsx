@@ -232,19 +232,32 @@ function SectionHeader({ eyebrow, first, italic, description, action }: { eyebro
 }
 
 function Skills() {
+  const sectionRef = useRef<HTMLElement>(null);
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(".skill-chip", { opacity: 0, scale: .7, y: 8 }, {
+        opacity: 1, scale: 1, y: 0, duration: .35, stagger: .018, ease: "back.out(1.8)",
+        scrollTrigger: { trigger: sectionRef.current, start: "top 58%", toggleActions: "play none none none" },
+      });
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
   return (
-    <section id="skills" className="border-y border-stroke bg-[#080808] py-20 md:py-28">
+    <section id="skills" ref={sectionRef} className="relative overflow-hidden border-y border-stroke bg-[#080808] py-20 md:py-28">
+      <div className="accent-gradient pointer-events-none absolute -left-48 top-1/3 h-80 w-80 rounded-full opacity-[.06] blur-[120px]" />
       <div className="mx-auto max-w-[1200px] px-6 md:px-10 lg:px-16">
         <SectionHeader eyebrow="Technical capabilities" first="Complete" italic="toolkit" description="A production-focused stack spanning AI research, application engineering, cloud deployment, and automation." action="50+ technologies" />
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 [perspective:1200px] md:grid-cols-2 lg:grid-cols-3">
           {skillGroups.map((group, i) => (
-            <motion.article key={group.title} initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: .55, delay: (i % 3) * .07 }} className="rounded-3xl border border-stroke bg-surface/50 p-6">
+            <motion.article key={group.title} initial={{ opacity: 0, y: 70, rotateX: -18, scale: .94 }} whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }} viewport={{ once: true, margin: "-80px" }} whileHover={{ y: -9, scale: 1.015 }} transition={{ duration: .75, delay: (i % 3) * .08, ease: [0.25, 0.1, 0.25, 1] }} className="skill-card group relative overflow-hidden rounded-3xl border border-stroke bg-surface/50 p-6">
+              <div className="card-shine pointer-events-none absolute inset-0 opacity-0 transition duration-500 group-hover:opacity-100" />
+              <div className="accent-gradient absolute inset-x-8 top-0 h-px origin-left scale-x-0 transition duration-500 group-hover:scale-x-100" />
               <div className="mb-6 flex items-center justify-between">
-                <h3 className="font-display text-2xl italic">{group.title}</h3>
-                <span className="font-display text-xl italic text-muted">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="relative font-display text-2xl italic transition duration-300 group-hover:text-white">{group.title}</h3>
+                <span className="relative font-display text-xl italic text-muted transition duration-500 group-hover:rotate-[360deg] group-hover:text-[#89aacc]">{String(i + 1).padStart(2, "0")}</span>
               </div>
-              <div className="flex flex-wrap gap-2">
-                {group.skills.map((skill) => <span key={skill} className="rounded-full border border-stroke bg-bg px-3 py-2 text-[10px] uppercase tracking-[.12em] text-muted transition hover:border-[#6f9fce] hover:text-text-primary">{skill}</span>)}
+              <div className="relative flex flex-wrap gap-2">
+                {group.skills.map((skill) => <span key={skill} className="skill-chip rounded-full border border-stroke bg-bg px-3 py-2 text-[10px] uppercase tracking-[.12em] text-muted transition duration-300 hover:-translate-y-1 hover:border-[#6f9fce] hover:bg-[#102136] hover:text-text-primary">{skill}</span>)}
               </div>
             </motion.article>
           ))}
@@ -255,27 +268,41 @@ function Skills() {
 }
 
 function Works() {
+  const sectionRef = useRef<HTMLElement>(null);
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray<HTMLElement>(".project-card").forEach((card, i) => {
+        const image = card.querySelector(".project-image");
+        if (image) gsap.fromTo(image, { yPercent: -5, scale: 1.08 }, { yPercent: 5, scale: 1.08, ease: "none", scrollTrigger: { trigger: card, start: "top bottom", end: "bottom top", scrub: 1 } });
+      });
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
   return (
-    <section id="work" className="bg-bg py-20 md:py-28">
+    <section id="work" ref={sectionRef} className="relative overflow-hidden bg-bg py-20 md:py-28">
+      <div className="accent-gradient pointer-events-none absolute -right-48 top-1/4 h-96 w-96 rounded-full opacity-[.05] blur-[130px]" />
       <div className="mx-auto max-w-[1200px] px-6 md:px-10 lg:px-16">
         <SectionHeader eyebrow="Complete project archive" first="Production" italic="AI projects" description="End-to-end AI products built across SaaS, automotive, customer support, agent orchestration, document processing, traffic analytics, and healthcare." action="8 featured systems" />
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
+        <div className="grid grid-cols-1 gap-5 [perspective:1400px] md:grid-cols-2 md:gap-6">
           {projects.map((project, i) => (
-            <motion.article initial={{ opacity: 0, y: 35 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-80px" }} transition={{ duration: .7, delay: (i % 2) * .08 }} key={project.title} className="group overflow-hidden rounded-3xl border border-stroke bg-surface">
+            <motion.article initial={{ opacity: 0, x: i % 2 === 0 ? -70 : 70, y: 45, rotateY: i % 2 === 0 ? 7 : -7 }} whileInView={{ opacity: 1, x: 0, y: 0, rotateY: 0 }} viewport={{ once: true, margin: "-90px" }} whileHover={{ y: -10 }} transition={{ duration: .85, delay: (i % 2) * .08, ease: [0.25, 0.1, 0.25, 1] }} key={project.title} className="project-card group relative overflow-hidden rounded-3xl border border-stroke bg-surface shadow-2xl shadow-black/0 transition-shadow duration-500 hover:shadow-black/50">
+              <div className="card-shine pointer-events-none absolute inset-0 z-20 opacity-0 transition duration-500 group-hover:opacity-100" />
+              <div className="accent-gradient absolute inset-x-8 top-0 z-30 h-px origin-center scale-x-0 transition duration-500 group-hover:scale-x-100" />
               <div className="relative aspect-[1.65] overflow-hidden">
-                <img src={project.image} alt="" className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105" />
+                <img src={project.image} alt="" className="project-image h-[112%] w-full object-cover transition duration-700 ease-out group-hover:scale-[1.13]" />
                 <div className="halftone absolute inset-0 opacity-20 mix-blend-multiply" />
                 <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent" />
-                <span className="absolute left-5 top-5 rounded-full border border-white/15 bg-bg/60 px-3 py-2 text-[9px] uppercase tracking-[.2em] backdrop-blur-lg">{project.type}</span>
+                <div className="scan-line pointer-events-none absolute inset-x-0 top-0 h-px opacity-0 group-hover:opacity-100" />
+                <span className="absolute left-5 top-5 rounded-full border border-white/15 bg-bg/60 px-3 py-2 text-[9px] uppercase tracking-[.2em] backdrop-blur-lg transition duration-500 group-hover:border-[#89aacc]/50 group-hover:bg-bg/80">{project.type}</span>
               </div>
-              <div className="p-6 md:p-7">
+              <div className="relative p-6 md:p-7">
                 <div className="mb-4 flex items-start justify-between gap-4">
-                  <h3 className="text-xl font-medium md:text-2xl">{project.title}</h3>
-                  <span className="font-display text-2xl italic text-muted">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="text-xl font-medium transition duration-300 group-hover:text-white md:text-2xl">{project.title}</h3>
+                  <span className="font-display text-2xl italic text-muted transition duration-500 group-hover:-translate-y-1 group-hover:text-[#89aacc]">{String(i + 1).padStart(2, "0")}</span>
                 </div>
                 <p className="mb-5 text-sm leading-6 text-muted">{project.description}</p>
                 <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => <span key={tag} className="rounded-full border border-stroke px-3 py-1.5 text-[9px] uppercase tracking-[.14em] text-muted">{tag}</span>)}
+                  {project.tags.map((tag) => <span key={tag} className="rounded-full border border-stroke px-3 py-1.5 text-[9px] uppercase tracking-[.14em] text-muted transition duration-300 group-hover:border-white/15">{tag}</span>)}
                 </div>
                 {"url" in project && project.url && <a href={project.url} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center text-xs text-muted transition hover:text-text-primary">View on GitHub <ArrowUpRight className="ml-2 h-4 w-4" /></a>}
               </div>
