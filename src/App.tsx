@@ -102,8 +102,25 @@ function LoadingScreen({ onComplete }: { onComplete: () => void }) {
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("home");
+  const links = [
+    { label: "Home", id: "home", className: "hidden sm:inline-flex" },
+    { label: "About", id: "about", className: "inline-flex" },
+    { label: "Skills", id: "skills", className: "inline-flex" },
+    { label: "Work", id: "work", className: "inline-flex" },
+    { label: "Experience", id: "experience", className: "hidden lg:inline-flex" },
+    { label: "Contact", id: "contact", className: "hidden md:inline-flex" },
+  ];
   useEffect(() => {
-    const update = () => setScrolled(window.scrollY > 100);
+    const update = () => {
+      setScrolled(window.scrollY > 100);
+      const current = links
+        .map((link) => document.getElementById(link.id))
+        .filter(Boolean)
+        .reduce<HTMLElement | null>((match, section) => section!.getBoundingClientRect().top <= 140 ? section : match, null);
+      if (current?.id) setActive(current.id);
+    };
+    update();
     window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);
   }, []);
@@ -115,7 +132,7 @@ function Navbar() {
           <span className="grid h-[34px] w-[34px] place-items-center rounded-full bg-bg font-display text-sm italic transition-transform group-hover:scale-90">TF</span>
         </button>
         <span className="mx-1 hidden h-5 w-px bg-stroke sm:block" />
-        {[["About", "about"], ["Work", "work"], ["Skills", "skills"]].map(([label, id]) => <button key={id} onClick={() => go(`#${id}`)} className="rounded-full px-3 py-2 text-xs text-muted transition hover:bg-stroke/60 hover:text-text-primary sm:px-4">{label}</button>)}
+        {links.map((link) => <button key={link.id} onClick={() => go(`#${link.id}`)} className={`${link.className} rounded-full px-3 py-2 text-xs transition sm:px-4 ${active === link.id ? "bg-stroke/70 text-text-primary" : "text-muted hover:bg-stroke/60 hover:text-text-primary"}`}>{link.label}</button>)}
         <span className="mx-1 h-5 w-px bg-stroke" />
         <a href="https://wa.me/971547224740" target="_blank" rel="noreferrer" className="gradient-border rounded-full bg-surface px-3 py-2 text-xs sm:px-4">WhatsApp <ArrowUpRight className="ml-1 inline h-3 w-3" /></a>
       </div>
@@ -413,7 +430,7 @@ function Footer() {
     return () => { tween.kill(); };
   }, []);
   return (
-    <footer className="relative overflow-hidden bg-bg pt-20">
+    <footer id="contact" className="relative overflow-hidden bg-bg pt-20">
       <VideoBackground flipped />
       <div className="absolute inset-0 bg-black/70" />
       <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-bg to-transparent" />
