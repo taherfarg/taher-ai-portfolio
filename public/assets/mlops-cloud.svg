@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="65%"><stop stop-color="#153657"/><stop offset="1" stop-color="#030508"/></radialGradient>
+    <filter id="g"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="800" height="800" fill="url(#bg)"/>
+  <g fill="none" stroke="#8fc8ff" filter="url(#g)">
+    <path stroke-width="8" d="M245 475c-75 0-115-42-115-102 0-58 42-100 100-101 22-94 100-147 188-122 66 19 108 67 117 127 79-2 135 42 135 105 0 62-50 93-120 93Z"/>
+    <path stroke-width="5" d="M300 350h200v125H300zM335 395h130M400 475v90M305 610h190"/>
+  </g>
+  <g fill="#b8dcff" filter="url(#g)"><circle cx="305" cy="610" r="14"/><circle cx="400" cy="610" r="14"/><circle cx="495" cy="610" r="14"/><circle cx="400" cy="350" r="13"/></g>
+  <g opacity=".18" stroke="#89aacc"><circle cx="400" cy="400" r="300" fill="none" stroke-dasharray="8 18"/><circle cx="400" cy="400" r="245" fill="none" stroke-dasharray="5 22"/></g>
+</svg>

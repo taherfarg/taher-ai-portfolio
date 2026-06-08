@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="70%"><stop stop-color="#173a63"/><stop offset="1" stop-color="#04070b"/></radialGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9ac8ff"/><stop offset="1" stop-color="#357dca"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="800" height="800" fill="url(#bg)"/>
+  <g opacity=".18" stroke="#89aacc"><path d="M0 100h800M0 200h800M0 300h800M0 400h800M0 500h800M0 600h800M0 700h800"/><path d="M100 0v800M200 0v800M300 0v800M400 0v800M500 0v800M600 0v800M700 0v800"/></g>
+  <g fill="none" stroke="url(#line)" stroke-width="5" filter="url(#glow)">
+    <circle cx="400" cy="400" r="130"/><circle cx="400" cy="400" r="235" stroke-dasharray="7 18"/>
+    <path d="M400 165v105M400 530v105M165 400h105M530 400h105M235 235l75 75M490 490l75 75M565 235l-75 75M310 490l-75 75"/>
+  </g>
+  <g fill="#b5d8ff" filter="url(#glow)"><circle cx="400" cy="400" r="28"/><circle cx="400" cy="165" r="14"/><circle cx="400" cy="635" r="14"/><circle cx="165" cy="400" r="14"/><circle cx="635" cy="400" r="14"/><circle cx="235" cy="235" r="14"/><circle cx="565" cy="565" r="14"/><circle cx="565" cy="235" r="14"/><circle cx="235" cy="565" r="14"/></g>
+</svg>

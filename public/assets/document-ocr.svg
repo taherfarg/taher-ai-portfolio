@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#102b46"/><stop offset="1" stop-color="#020406"/></linearGradient>
+    <linearGradient id="p" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dbeeff"/><stop offset="1" stop-color="#6fa6d8"/></linearGradient>
+    <filter id="g"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="800" height="800" fill="url(#bg)"/>
+  <path d="M245 125h230l110 110v440H245z" fill="url(#p)" opacity=".13" stroke="#8fc8ff" stroke-width="4"/>
+  <path d="M475 125v110h110" fill="none" stroke="#8fc8ff" stroke-width="4"/>
+  <g stroke="#9bcfff" stroke-width="8" opacity=".75"><path d="M315 315h200M315 370h200M315 425h145M315 535h200"/></g>
+  <g stroke="#b9ddff" stroke-width="10" fill="none" filter="url(#g)"><path d="M185 250v-65h65M550 185h65v65M615 550v65h-65M250 615h-65v-65"/><path d="M210 480h380"/></g>
+  <rect x="210" y="468" width="380" height="24" rx="12" fill="#8fc8ff" opacity=".9" filter="url(#g)"/>
+</svg>
