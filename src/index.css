@@ -100,10 +100,6 @@ button {
   will-change: transform, opacity;
 }
 
-.animate-role-fade-in {
-  animation: role-fade-in .4s ease-out;
-}
-
 .animate-scroll-down {
   animation: scroll-down 1.5s ease-in-out infinite;
 }
@@ -111,11 +107,6 @@ button {
 @keyframes scroll-down {
   from { transform: translateY(-100%); }
   to { transform: translateY(200%); }
-}
-
-@keyframes role-fade-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes gradient-shift {

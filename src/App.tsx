@@ -168,11 +168,6 @@ function Navbar() {
 
 function Hero({ ready }: { ready: boolean }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const [role, setRole] = useState(0);
-  useEffect(() => {
-    const timer = setInterval(() => setRole((r) => (r + 1) % 4), 2000);
-    return () => clearInterval(timer);
-  }, []);
   useLayoutEffect(() => {
     if (!ready) return;
     const ctx = gsap.context(() => {
@@ -182,7 +177,6 @@ function Hero({ ready }: { ready: boolean }) {
     }, sectionRef);
     return () => ctx.revert();
   }, [ready]);
-  const roles = ["AI Engineer", "LLM Builder", "CV Developer", "MLOps Engineer"];
   return (
     <section id="home" ref={sectionRef} className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 text-center">
       <VideoBackground />
@@ -192,7 +186,8 @@ function Hero({ ready }: { ready: boolean }) {
       <div className="relative z-10 flex flex-col items-center pt-16">
         <p className="blur-in mb-8 text-[10px] uppercase tracking-[.4em] text-white/55">Production AI · Dubai</p>
         <h1 className="name-reveal mb-6 font-display text-6xl italic leading-[.84] tracking-[-.04em] md:text-8xl lg:text-[8rem]">Taher Farg<span className="sr-only"> — AI Engineer &amp; Full-Stack AI Developer in Dubai</span></h1>
-        <p className="blur-in mb-5 text-sm text-white/70 md:text-base">An <span key={role} className="animate-role-fade-in inline-block font-display text-xl italic text-white md:text-2xl">{roles[role]}</span> based in Dubai.</p>
+        {/* Kept static: a rotating role is whatever a crawler happens to snapshot, and it became the Google snippet. */}
+        <p className="blur-in mb-5 text-sm text-white/70 md:text-base">An <span className="inline-block font-display text-xl italic text-white md:text-2xl">AI Engineer</span> based in Dubai.</p>
         <p className="blur-in mb-10 max-w-xl text-sm leading-7 text-white/55 md:text-base">I turn business problems into deployable AI products across LLM applications, computer vision, OCR, and intelligent automation.</p>
         <div className="blur-in flex w-full max-w-sm flex-col gap-3 sm:w-auto sm:max-w-none sm:flex-row">
           <a href="#work" className="gradient-border rounded-full bg-text-primary px-7 py-3.5 text-sm text-bg transition duration-300 hover:scale-105 hover:bg-bg hover:text-text-primary">See works <ArrowDownRight className="ml-2 inline h-4 w-4" /></a>
