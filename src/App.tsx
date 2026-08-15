@@ -191,7 +191,7 @@ function Hero({ ready }: { ready: boolean }) {
       <div className="noise pointer-events-none absolute inset-0" />
       <div className="relative z-10 flex flex-col items-center pt-16">
         <p className="blur-in mb-8 text-[10px] uppercase tracking-[.4em] text-white/55">Production AI · Dubai</p>
-        <h1 className="name-reveal mb-6 font-display text-6xl italic leading-[.84] tracking-[-.04em] md:text-8xl lg:text-[8rem]">Taher Farg</h1>
+        <h1 className="name-reveal mb-6 font-display text-6xl italic leading-[.84] tracking-[-.04em] md:text-8xl lg:text-[8rem]">Taher Farg<span className="sr-only"> — AI Engineer &amp; Full-Stack AI Developer in Dubai</span></h1>
         <p className="blur-in mb-5 text-sm text-white/70 md:text-base">An <span key={role} className="animate-role-fade-in inline-block font-display text-xl italic text-white md:text-2xl">{roles[role]}</span> based in Dubai.</p>
         <p className="blur-in mb-10 max-w-xl text-sm leading-7 text-white/55 md:text-base">I turn business problems into deployable AI products across LLM applications, computer vision, OCR, and intelligent automation.</p>
         <div className="blur-in flex w-full max-w-sm flex-col gap-3 sm:w-auto sm:max-w-none sm:flex-row">
@@ -234,7 +234,7 @@ function About() {
           <div className="about-glow accent-gradient absolute -inset-3 rotate-[-3deg] rounded-[36px] opacity-35 blur-xl" />
           <div className="relative overflow-hidden rounded-[32px] border border-white/15 bg-surface p-2 shadow-2xl shadow-black/50 transition duration-500 hover:rotate-2 hover:scale-[1.015]">
             <div className="relative aspect-[3/4] overflow-hidden rounded-[26px]">
-              <img src="/assets/taher-farg.webp" alt="Taher Farg Ibrahim, AI Engineer" className="about-photo h-[112%] w-full object-cover object-[50%_25%] transition duration-700 hover:scale-[1.08]" />
+              <img src="/assets/taher-farg.webp" srcSet="/assets/taher-farg.webp 868w, /taher-farg-portrait.jpg 1200w" sizes="(min-width: 768px) 420px, 100vw" width={868} height={1280} fetchPriority="high" alt="Taher Farg Ibrahim, AI Engineer and Full-Stack AI Developer based in Dubai" className="about-photo h-[112%] w-full object-cover object-[50%_25%] transition duration-700 hover:scale-[1.08]" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
               <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-4">
                 <div><p className="font-display text-2xl italic">Taher Farg</p><p className="mt-1 text-[9px] uppercase tracking-[.24em] text-white/55">AI Engineer · Dubai</p></div>
@@ -332,7 +332,7 @@ function Works() {
               <div className="card-shine pointer-events-none absolute inset-0 z-20 opacity-0 transition duration-500 group-hover:opacity-100" />
               <div className="accent-gradient absolute inset-x-8 top-0 z-30 h-px origin-center scale-x-0 transition duration-500 group-hover:scale-x-100" />
               <div className="relative aspect-[1.65] overflow-hidden">
-                <img src={project.image} alt="" className="project-image h-[112%] w-full object-cover transition duration-700 ease-out group-hover:scale-[1.13]" />
+                <img src={project.image} alt={`${project.title} — ${project.type} project by Taher Farg`} loading="lazy" decoding="async" className="project-image h-[112%] w-full object-cover transition duration-700 ease-out group-hover:scale-[1.13]" />
                 <div className="halftone absolute inset-0 opacity-20 mix-blend-multiply" />
                 <div className="absolute inset-0 bg-gradient-to-t from-bg via-transparent to-transparent" />
                 <div className="scan-line pointer-events-none absolute inset-x-0 top-0 h-px opacity-0 group-hover:opacity-100" />
@@ -434,10 +434,10 @@ function Explorations() {
       </div>
       <div className="pointer-events-none absolute inset-0 z-20 mx-auto grid max-w-[1400px] grid-cols-2 gap-12 px-5 md:gap-40 md:px-16">
         <div className="parallax-left flex flex-col gap-[55vh] pt-[75vh] md:items-start">
-          {explorations.slice(0, 3).map((image, i) => <button onClick={() => setLightbox(image.src)} key={image.src} className="group pointer-events-auto relative aspect-square w-full max-w-[320px] overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/60 transition hover:scale-[1.03]" style={{ transform: `rotate(${[-5, 3, -3][i]}deg)` }}><img src={image.src} alt={image.title} className="h-full w-full object-cover" /><span className="absolute inset-x-4 bottom-4 rounded-full border border-white/10 bg-black/50 px-4 py-2 text-left text-[9px] uppercase tracking-[.2em] text-white/70 backdrop-blur-md transition group-hover:text-white">{image.title}</span></button>)}
+          {explorations.slice(0, 3).map((image, i) => <button onClick={() => setLightbox(image.src)} key={image.src} className="group pointer-events-auto relative aspect-square w-full max-w-[320px] overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/60 transition hover:scale-[1.03]" style={{ transform: `rotate(${[-5, 3, -3][i]}deg)` }}><img src={image.src} alt={`${image.title} — AI focus area`} loading="lazy" decoding="async" className="h-full w-full object-cover" /><span className="absolute inset-x-4 bottom-4 rounded-full border border-white/10 bg-black/50 px-4 py-2 text-left text-[9px] uppercase tracking-[.2em] text-white/70 backdrop-blur-md transition group-hover:text-white">{image.title}</span></button>)}
         </div>
         <div className="parallax-right flex flex-col items-end gap-[60vh] pt-[100vh]">
-          {explorations.slice(3).map((image, i) => <button onClick={() => setLightbox(image.src)} key={image.src} className="group pointer-events-auto relative aspect-square w-full max-w-[320px] overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/60 transition hover:scale-[1.03]" style={{ transform: `rotate(${[4, -4, 5][i]}deg)` }}><img src={image.src} alt={image.title} className="h-full w-full object-cover" /><span className="absolute inset-x-4 bottom-4 rounded-full border border-white/10 bg-black/50 px-4 py-2 text-left text-[9px] uppercase tracking-[.2em] text-white/70 backdrop-blur-md transition group-hover:text-white">{image.title}</span></button>)}
+          {explorations.slice(3).map((image, i) => <button onClick={() => setLightbox(image.src)} key={image.src} className="group pointer-events-auto relative aspect-square w-full max-w-[320px] overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/60 transition hover:scale-[1.03]" style={{ transform: `rotate(${[4, -4, 5][i]}deg)` }}><img src={image.src} alt={`${image.title} — AI focus area`} loading="lazy" decoding="async" className="h-full w-full object-cover" /><span className="absolute inset-x-4 bottom-4 rounded-full border border-white/10 bg-black/50 px-4 py-2 text-left text-[9px] uppercase tracking-[.2em] text-white/70 backdrop-blur-md transition group-hover:text-white">{image.title}</span></button>)}
         </div>
       </div>
       <AnimatePresence>{lightbox && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setLightbox(null)} className="fixed inset-0 z-[100] grid cursor-zoom-out place-items-center bg-black/90 p-6 backdrop-blur-xl"><button aria-label="Close" className="absolute right-6 top-6"><X /></button><motion.img initial={{ scale: .9 }} animate={{ scale: 1 }} src={lightbox} alt="" className="max-h-[82vh] max-w-[90vw] rounded-2xl object-contain" /></motion.div>}</AnimatePresence>

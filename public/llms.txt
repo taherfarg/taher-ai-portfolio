@@ -1,0 +1,52 @@
+# Taher Farg
+
+> Taher Farg (Taher Farg Ibrahim) is an AI Engineer and Full-Stack AI Developer based in Dubai,
+> United Arab Emirates. He builds production AI systems: LLM applications, RAG chatbots,
+> computer vision, OCR pipelines, and business automation.
+
+- Site: https://www.taherfarg.com/
+- Location: Dubai, UAE
+- Languages: Arabic, English
+- Email: taherfarg50@gmail.com
+- WhatsApp / phone: +971 54 722 4740
+- GitHub: https://github.com/taherfarg
+- Photo: https://www.taherfarg.com/taher-farg-1x1.jpg
+- Status: open to AI engineering opportunities
+
+## Current role
+
+AI Engineer & Full-Stack Developer at Pollux Motors, Dubai (April 2025 — present). Builds and
+maintains production systems for automotive import/export operations: website, vehicle listings,
+APIs, and internal tools; an AI customer-support chatbot connected to internal vehicle data;
+n8n automations for lead collection, qualification, follow-up, and booking; face-recognition and
+QR attendance tooling.
+
+Previously: AI Engineer Intern at the Information Technology Institute (ITI), Fayoum, Egypt
+(September — November 2023).
+
+## Projects
+
+- **AutoExport AI ERP / AutoSphere** — white-label, multi-tenant ERP for vehicle trading groups with inventory, CRM, quotations, finance, documents, reports, and permission-aware AI workflows. Next.js, TypeScript, Supabase, PostgreSQL, RLS.
+- **AI SmartChoice** — bilingual affiliate SaaS that scrapes Amazon products and generates AI verdicts, review summaries, pros/cons, scores, and price insights. Next.js 14, Supabase, Ollama, Python.
+- **Local AI Desktop Assistant** — voice-activated private agent with 100+ tools for PC control, file management, OCR screen reading, and safe system automation. Python, LangChain, Ollama, Docker.
+- **Enterprise RAG Support Chatbot** — production RAG chatbot over 768K+ support records with semantic search, source context, streaming, and multi-turn memory. LangChain, ChromaDB, Gradio.
+- **Gemini Subagents** — open-source manager-and-workers agent orchestration skill. https://github.com/taherfarg/claude-antigravity-subagents
+- **Arabic Legal Document OCR** — GPU-enabled OCR pipeline for scanned Arabic legal documents with PDF batching and bilingual prompts. PyTorch, CUDA, Gemma 3.
+- **Traffic Speed & Violation System** — real-time vehicle detection, tracking, perspective-based speed estimation, and automated violation capture. YOLOv8, OpenCV, ByteTrack, Flask.
+- **NeurAI Brain Tumor Detection** — MRI classification for glioma, meningioma, and pituitary tumors. TensorFlow, Flask.
+
+## Skills
+
+AI/ML: machine learning, deep learning, computer vision, NLP, transformers, LLMs, RAG, OCR, prompt engineering.
+Frameworks: PyTorch, TensorFlow, scikit-learn, Hugging Face, LangChain, LangGraph, OpenAI API, Ollama, ChromaDB.
+Backend & product: Python, FastAPI, Flask, Pydantic, Node.js, TypeScript, React, Next.js, REST APIs, Streamlit, Gradio.
+Data: PostgreSQL, Supabase, MySQL, SQL, pandas, NumPy, embeddings, RLS.
+Cloud & MLOps: AWS, Azure, GCP, Azure AI, Azure ML, Docker, Kubernetes, MLflow, CI/CD, model serving, monitoring.
+Automation: n8n, Git, Linux, Power BI, Playwright, Vitest.
+
+## Certifications
+
+- IBM Data Science Professional Certificate — IBM / Coursera
+- DeepLearning.AI TensorFlow Developer — DeepLearning.AI
+- Machine Learning Specialization — Stanford University & DeepLearning.AI
+- Deep Learning Specialization — DeepLearning.AI
